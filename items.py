@@ -5,6 +5,24 @@ class Weapon:
 	def __str__(self):
 		return self.name
 
+class 3Saber(Weapon):
+	def __init__(self):
+		self.name = "Lightsaber"
+		self.description = "Your lightsaber, ready to use."
+		self.damage = 6
+
+class 4Saber(Weapon):
+	def __init__(self):
+		self.name = "Lightsaber"
+		self.description = "Your lightsaber, ready to use."
+		self.damage = 8
+
+class 5Saber(Weapon):
+	def __init__(self):
+		self.name = "Lightsaber"
+		self.description = "Your lightsaber, ready to use."
+		self.damage = 10
+
 class Rock(Weapon):
 	def __init__(self):
 		self.name = "Rock"
