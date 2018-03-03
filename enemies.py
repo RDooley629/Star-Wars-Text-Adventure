@@ -65,8 +65,19 @@ class Stormtrooper(Enemy):
 	description = "It twitches its mandibles at you menacingly."
 	hp = 25
 	damage = 10
+	
+class StormtrooperGroup(Enemy):
+	name = "Stormtrooper"
+	description = "It twitches its mandibles at you menacingly."
+	hp = 25
+	damage = 10
 
-
+class ImperialOfficer(Enemy):
+	name = "Stormtrooper"
+	description = "It twitches its mandibles at you menacingly."
+	hp = 25
+	damage = 10
+	
 class Ogre(Enemy):
 	name = "Ogre"
 	description = "It looks angry."
@@ -81,11 +92,3 @@ class BatColony(Enemy):
 	damage = 4
 	
 	agro = True
-
-
-class RockMonster(Enemy):
-	name = "Rock Monster"
-	description = "A Rock Monster appears from the shadows. An old iron key dangles precariously from a stalagmite on the monster's shoulder."
-	hp = 80
-	damage = 15
-	loot = [items.Iron_Key("An old iron key lies on the ground near the remains of the Rock Monster.")]

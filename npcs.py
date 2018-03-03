@@ -32,7 +32,7 @@ class NPC:
 
 class OldMan(NPC):
 	name = "Old Man"
-	goods = [items.Dagger(), items.Red_Potion(value = 50), items.Crusty_Bread(value = 5)]
+	#goods = [items.Dagger(), items.Red_Potion(value = 50), items.Crusty_Bread(value = 5)]
 	quantities = [1, -1, 2]		# Set quantity to -1 if you want it to be infinite.
 	
 	description = "An old man in a red robe is standing in the middle of the room."

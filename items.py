@@ -102,7 +102,7 @@ class Weapon(Item):
 		return [self.attack_descriptions[randint(0, len(self.attack_descriptions)-1)]]		# Return a random attack description from your list.
 		
 
-class GreenSaber(Item):
+class GreenLightsaber(Item):
 	name = "green lightsaber"
 
 	description = "You hold the lightsaber in your hand. It's comforting."
@@ -110,7 +110,7 @@ class GreenSaber(Item):
 	equip_description = "A humming green blade emerges from the hilt, bathing the area in light." 
 	attack_descriptions = ["You swing the lightsaber.", "Going for a horizontal blow, you nearly cut your foe in half.", "SHWING batabatabata SHWING!"]
 
-class BlueSaber(Item):
+class BlueLightsaber(Item):
 	name = "blue lightsaber"
 
 	description = "This blade has been with you from childhood. It's seen a lot, but still holds up."
@@ -118,7 +118,7 @@ class BlueSaber(Item):
 	equip_description = "A blue blade hums away from your body. You feel prepared."
 	attack_descriptions = ["You slash at your enemy.", "Like an extension of your body, your lightsaber swings through the air.", "You strike at your foe, watching for a response."]
 
-class YellowSaber(Item):
+class YellowLightsaber(Item):
 	name = "yellow lightsaber"
 
 	description = "It's not the most common blade color, but it's yours. Having it close is comforting."

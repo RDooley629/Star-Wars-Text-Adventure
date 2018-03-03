@@ -132,9 +132,9 @@ class Maptile:
 		for index in reversed(dead_enemy_indices):
 			self.enemies.pop(index)
 		if(self.x == player.x and self.y == player.y):
-			if(teleport):
-				player.x = teleport[0]
-				player.y = teleport[1]
+			if(self.teleport):
+				player.x = self.teleport[0]
+				player.y = self.teleport[1]
 			for enemy in self.enemies:
 				if(enemy.agro):
 					agro_text = "The %s seems very aggitated. It attacks! " % enemy.name
@@ -145,22 +145,22 @@ class Maptile:
 
 
 class relica(Maptile):
-	descripion = 
+	descripion = ""
 
 
 class storage(Maptile):
-	descripion = 
+	descripion = ""
 
 
 class storeroom(Maptile):
-	descripion = 
+	descripion = ""
 
 
 class bedrooma(Maptile):
 	description = """
 	This bedroom likely belonged to an apprentice, judging by the robes in the closet. 
 	A small bed lies on one wall, while a dresser faces it from the other side. The walls are bare of adornment.
-		""""
+		"""
 	items = [items.Green_Keychip("A green keychip lies on the dresser.")]
 
 
@@ -476,14 +476,14 @@ class startingroom(Maptile):
 
 class World:
 	map = [
-		[relica(barriers = [barriers.wall('s')]),									storage(barriers = [barriers.wall('s')]),																		storeroom(barriers = [barriers.wall('e'), barriers.relicdoor('w')]),							bedrooma(barriers = [barriers.wall('w'), barriers.wall('e')]),						yourroom(barriers = [barriers.wall('s'), barriers.wall('w')]),					northfield(),																		studentroom(barriers = [barrier.wall('s')])							]
-		[study(barriers = [barriers.secretdoor('n'), barriers.wall('e')]),			meditation(barriers = [barriers.wall('n'), barriers.wall('w')]),												corridor(),																						mealroom(barriers = [barriers.wall('e')]),											beach(barriers = [barriers.wall('w'), barriers.wall('n'), barriers.wall('s')]),	trainingfield(),																	medbuilding(barriers = [barriers.wall('n'), barriers.wall('s')])	]
-		[bedroomm(barriers = [barriers.wall('s')]),									sparroom(barriers = [barriers.wall('s'), barriers.wall('e'), barriers.bedroomdoor('w')]),						enter(barriers = [barriers.wall('w'), barriers.wall('e'), barriers.door('n')]),					kitchen(barriers = [barriers.wall('w'), barriers.wall('s'), barriers.door('e')]),	landingarea(barriers = [barriers.wall('n'), barriers.wall('w')]),				southfield(barriers = [barriers.wall('s')]),										lukehut(barriers = [barriers.wall('n'), barriers.wall('s')])		]
-		[None,																		spacea(barriers = [barriers.wall('n')]),																		spaceb(barriers = [barriers.wall('w'), barriers.wall('s')]),									hyperspace(barriers = [barriers.wall('n'), barriers.wall('s')]),					spacec(barriers = [barriers.wall('s')]),										store(barriers = [barriers.wall('n'), barriers.wall('s'), barriers.wall('e')]),		templeteleport()													]
-		[housestudy(barriers = [barriers.wall('n'), barriers.wall('s')]),			foyer(barriers = [barriers.wall('e'), barriers.foyerdoor('w')], enemies = [enemies.StormtrooperGroup()]),		housekitchen(barriers = [barriers.wall('w'), barriers.wall('n'), barriers.woodendoor('e')]),	staffroom(barriers = [barriers.wall('n'), barriers.wall('s')]),						trophyteleport(),																introfoyer(barriers = [barriers.wall('n'), barriers.wall('e')]),					temple(barriers = [barriers.wall('w'), barriers.wall('s')])			]
-		[trophyroomup(barriers = [barriers.wall('e'), barriers.secretdoor('n')]),	frontparlor(barriers = [barriers.wall('w')], enemies = [enemies.ImperialOfficer('n')]),							diningroom(barriers = barriers.wall('s'), barriers.wall('e')]),									keys(barriers = barriers.wall('n'), barriers.wall('w'), barriers.wall('e')]),		trophyroomupintro(barriers = [barriers.wall('w'), barriers.wall('e')]),			frontparlorintro(barriers = barriers.wall('w'), barriers.wall('e')]),				timeskip(barriers = [barriers.wall('w'), barriers.wall('s')])		]
-		[trophyroommain(),															solar(enemies = [enemies.Stormtrooper()]),																		courtyardup(barriers = [barriers.wall('n')]),													gardenerhut(barriers = [barriers.door('n'), barriers.wall('e')]),					trophyroommainintro(barriers = barriers.wall('w')]),							solarintro(barriers = barriers.wall('s'), barriers.wall('e')]),						templespar(barriers = barriers.wall('w'), barriers.wall('s')])		]
-		[trophyroomlower(barriers = [barriers.wall('e')]),							courtyardleft(barriers = barriers.wall('w')]),																	statuering(),																					courtyardright(barriers = [barriers.wall('e')]),									trophyroomlowerintro(barriers = barriers.wall('w')]),							None,																				startingroom()														]
+		[relica(barriers = [barriers.wall('s')]),									storage(barriers = [barriers.wall('s')]),																		storeroom(barriers = [barriers.wall('e'), barriers.relicdoor('w')]),							bedrooma(barriers = [barriers.wall('w'), barriers.wall('e')]),						yourroom(barriers = [barriers.wall('s'), barriers.wall('w')]),					northfield(),																		studentroom(barriers = [barriers.wall('s')])						],
+		[study(barriers = [barriers.wall('n'), barriers.wall('e')]),				meditation(barriers = [barriers.wall('n'), barriers.wall('w')]),												corridor(),																						mealroom(barriers = [barriers.wall('e')]),											beach(barriers = [barriers.wall('w'), barriers.wall('n'), barriers.wall('s')]),	trainingfield(),																	medbuilding(barriers = [barriers.wall('n'), barriers.wall('s')])	],
+		[bedroomm(barriers = [barriers.wall('s')]),									sparroom(barriers = [barriers.wall('s'), barriers.wall('e'), barriers.bedroomdoor('w')]),						enter(barriers = [barriers.wall('w'), barriers.wall('e'), barriers.door('n')]),					kitchen(barriers = [barriers.wall('w'), barriers.wall('s'), barriers.door('e')]),	landingarea(barriers = [barriers.wall('n'), barriers.wall('w')]),				southfield(barriers = [barriers.wall('s')]),										lukehut(barriers = [barriers.wall('n'), barriers.wall('s')])		],
+		[None,																		spacea(barriers = [barriers.wall('n')]),																		spaceb(barriers = [barriers.wall('w'), barriers.wall('s')]),									hyperspace(barriers = [barriers.wall('n'), barriers.wall('s')]),					spacec(barriers = [barriers.wall('s')]),										store(barriers = [barriers.wall('n'), barriers.wall('s'), barriers.wall('e')]),		templeteleport()													],
+		[housestudy(barriers = [barriers.wall('n'), barriers.wall('s')]),			foyer(barriers = [barriers.wall('e'), barriers.foyerdoor('w')], enemies = [enemies.StormtrooperGroup()]),		housekitchen(barriers = [barriers.wall('w'), barriers.wall('n'), barriers.woodendoor('e')]),	staffroom(barriers = [barriers.wall('n'), barriers.wall('s')]),						trophyteleport(),																introfoyer(barriers = [barriers.wall('n'), barriers.wall('e')]),					temple(barriers = [barriers.wall('w'), barriers.wall('s')])			],
+		[trophyroomup(barriers = [barriers.wall('e'), barriers.wall('n')]),	frontparlor(barriers = [barriers.wall('w')], enemies = [enemies.ImperialOfficer('n')]),							diningroom(barriers = [barriers.wall('s'), barriers.wall('e')]),									keys(barriers = [barriers.wall('n'), barriers.wall('w'), barriers.wall('e')]),		trophyroomupintro(barriers = [barriers.wall('w'), barriers.wall('e')]),			frontparlorintro(barriers = [barriers.wall('w'), barriers.wall('e')]),				timeskip(barriers = [barriers.wall('w'), barriers.wall('s')])		],
+		[trophyroommain(),															solar(enemies = [enemies.Stormtrooper()]),																		courtyardup(barriers = [barriers.wall('n')]),													gardenerhut(barriers = [barriers.door('n'), barriers.wall('e')]),					trophyroommainintro(barriers = [barriers.wall('w')]),							solarintro(barriers = [barriers.wall('s'), barriers.wall('e')]),						templespar(barriers = [barriers.wall('w'), barriers.wall('s')])		],
+		[trophyroomlower(barriers = [barriers.wall('e')]),							courtyardleft(barriers = [barriers.wall('w')]),																	statuering(),																					courtyardright(barriers = [barriers.wall('e')]),									trophyroomlowerintro(barriers = [barriers.wall('w')]),							None,																				startingroom()														]
 	]
 
 	def __init__(self):
@@ -493,7 +493,7 @@ class World:
 					self.map[i][j].x = j
 					self.map[i][j].y = i
 					
-					self.add_implied_barriers(j,i)	# If there are implied barriers (e.g. edge of map, adjacent None room, etc.) add a Wall.
+					self.add_implied_barriers(j,i)	# If there are implied barriers (e.g. edge of map, adjacent None room, etc.) add a wall.
 						
 
 	def tile_at(self, x, y):
@@ -600,7 +600,7 @@ class World:
 				if barrier.direction == 'north':
 					barrier_present = True
 			if(not barrier_present):
-				self.map[y][x].add_barrier(barriers.Wall('n'))	
+				self.map[y][x].add_barrier(barriers.wall('n'))	
 				
 		[status, text] = self.check_south(x,y)
 		barrier_present = False
@@ -612,7 +612,7 @@ class World:
 				if barrier.direction == 'south':
 					barrier_present = True
 			if(not barrier_present):
-				self.map[y][x].add_barrier(barriers.Wall('s'))	
+				self.map[y][x].add_barrier(barriers.wall('s'))	
 			
 		[status, text] = self.check_east(x,y)
 		barrier_present = False
@@ -624,7 +624,7 @@ class World:
 				if barrier.direction == 'east':
 					barrier_present = True
 			if(not barrier_present):
-				self.map[y][x].add_barrier(barriers.Wall('e'))	
+				self.map[y][x].add_barrier(barriers.wall('e'))	
 			
 		[status, text] = self.check_west(x,y)
 		barrier_present = False
@@ -636,7 +636,7 @@ class World:
 				if barrier.direction == 'west':
 					barrier_present = True
 			if(not barrier_present):
-				self.map[y][x].add_barrier(barriers.Wall('w'))	
+				self.map[y][x].add_barrier(barriers.wall('w'))	
 		
 	def update_rooms(self, player):
 		for row in self.map:

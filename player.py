@@ -15,9 +15,9 @@ class Player:
 			self.forcepoints = 4
 			self.maxforcepoints = 4
 			self.inventory = [items.BlueLightsaber()]
-			self.health = defense*5
-			self.maxhealth = defense*5
-			self.weapon = BlueLightsaber
+			self.health = self.defense*5
+			self.maxhealth = self.defense*5
+			self.weapon = items.BlueLightsaber()
 			self.x = 6
 			self.y = 7
 
@@ -28,9 +28,9 @@ class Player:
 			self.forcepoints = 10
 			self.maxforcepoints = 10
 			self.inventory = [items.GreenLightsaber()]
-			self.health = defense*5
-			self.maxhealth = defense*5
-			self.weapon = GreenLightsaber
+			self.health = self.defense*5
+			self.maxhealth = self.defense*5
+			self.weapon = items.GreenLightsaber()
 			self.x = 6
 			self.x = 6
 			self.y = 7
@@ -43,9 +43,9 @@ class Player:
 			self.forcepoints = 6
 			self.maxforcepoints = 6
 			self.inventory = [items.YellowLightsaber()]
-			self.health = defense*5
-			self.maxhealth = defense*5
-			self.weapon = YellowLightsaber
+			self.health = self.defense*5
+			self.maxhealth = self.defense*5
+			self.weapon = items.YellowLightsaber()
 			self.x = 6
 			self.y = 7
 
@@ -60,7 +60,6 @@ class Player:
 				equipped_weapon = True
 			print(inventory_text)
 			best_weapon = self.most_powerful_weapon()
-		print("* %i Gold" % self.gold)
 		if(best_weapon):
 			print("Your best weapon is your {}.".format(best_weapon))
 		else:
@@ -95,17 +94,6 @@ class Player:
 		self.move(dx=-1, dy=0)
 		
 	def update_inventory(self):
-		gold_indices = []
-		gold_total = 0
-		for index in range(len(self.inventory)):
-			if(isinstance(self.inventory[index], items.Gold)):
-				gold_total += self.inventory[index].value
-				gold_indices.append(index)
-		if(gold_total > 0):
-			for index in reversed(gold_indices):		# Reversed to avoid popping the wrong element.	
-				self.inventory.pop(index)
-			self.gold += gold_total
-			print("Your wealth increased by %d Gold." % gold_total)
 		has_weapon = False
 		for item in self.inventory:
 			if(item == self.weapon):
@@ -114,23 +102,23 @@ class Player:
 			self.weapon = None	# Drop the equipped item if it is no longer in inventory.
 			
 	def heal(self, amount):
-		self.hp += amount
-		if(self.hp > self.max_hp):
-			self.hp = self.max_hp
+		self.health += amount
+		if(self.health > self.max_hp):
+			self.health = self.max_hp
 			return "Your health is fully restored."
 		else:
 			return "Your health was restored by %d HP." % amount
 			
 	def take_damage(self, amount):
-		self.hp -= amount
-		if(self.hp <= 0):
-			self.hp = 0
+		self.health -= amount
+		if(self.health <= 0):
+			self.health = 0
 			return "Your health is critical... everything is getting dark."
 		else:
 			return "You took %d damage." % amount
 			
 	def is_alive(self):
-		if(self.hp <= 0):
+		if(self.health <= 0):
 			return False
 		else:
 			return True
@@ -139,7 +127,7 @@ class Player:
 	def handle_input(self, verb, noun1, noun2):
 		if(verb == 'check'):
 			if(noun1 == 'self' or noun1 == 'health' or noun1 == 'hp'):
-				return [True, "Your health is currently %d / %d." % (self.hp, self.max_hp)]
+				return [True, "Your health is currently %d / %d." % (self.health, self.max_hp)]
 			for item in self.inventory:
 				if item.name.lower() == noun1:
 					return [True, item.check_text()]
