@@ -2,7 +2,7 @@ from formattext import *				# Import some important functions for formatting tex
 
 
 from player import Player
-from world import World
+from world2 import World
 import parse
 
 debug_mode = True	# Use this to toggle verbose mode on the text parser.
@@ -19,28 +19,12 @@ To toggle output from the game parser, type 'debug'. To exit the game at any tim
 		
 				
 
-#player = Player()
+player = Player()
 world = World()
-player = None
 	
 def play():	
-	global player
 	print_welcome_text()
-
-	while True:
-		player_class = input("Enter player class: Jedi Guardian, Jedi Sentinel, or Jedi Consular: ").lower()
-		if('guardian' in player_class):
-			player = Player('guardian')
-			break
-		elif('sentinel' in player_class):
-			player = Player('sentinel')
-			break
-		elif('consular' in player_class):
-			player = Player('consular')
-			break
-		else:
-			print("I don't understand. Please try again.")
-		
+	
 	print_wrap(world.tile_at(player.x,player.y).intro_text())
 	
 	while True:
