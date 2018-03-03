@@ -42,11 +42,23 @@ class Item:
 		return [False, None, inventory]
 		
 		
-class Iron_Key(Item):
-	name = "iron key"
+class Blue_Keychip(Item):
+	name = "blue keychip"
 	
-	description = "An old iron key. It looks like it would open a massive door."
-	dropped_description = "An old iron key is lying on the ground."		
+	description = "A blue keychip. It probably opens a door."
+	dropped_description = "A small blue keychip lies on the floor."	
+
+class Green_Keychip(Item):
+	name = "green keychip"
+	
+	description = "A green keychip. It's old, but still in working condition."
+	dropped_description = "A green keychip lies on the ground. It's small enough you almost miss it."	
+
+class Red_Keychip(Item):
+	name = "red keychip"
+	
+	description = "A red keychip from the gardener's hut. Probably opens something."
+	dropped_description = "An old iron key is lying on the ground."	
 		
 		
 class Consumable(Item):
@@ -87,64 +99,34 @@ class Weapon(Item):
 		return self.equip_description
 			
 	def attack(self):
-		return [self.attack_descriptions[randint(0, len(self.attack_descriptions)-1)], self.damage]		# Return damage and a random attack description from your list.
+		return [self.attack_descriptions[randint(0, len(self.attack_descriptions)-1)]]		# Return a random attack description from your list.
 		
 
+class GreenSaber(Item):
+	name = "green lightsaber"
 
-class Rock(Weapon):
-	name = "rock"
-	
-	description = "A fist-sized rock, suitable for bludgeoning."
-	dropped_description = "A fist-sized rock lies on the ground. It looks like it would be suitable for bludgeoning someone... or something."
-	equip_description = "You arm yourself with the rock."
-	attack_descriptions = ["You swing the rock as hard as you can. Crack!", "You wind up and chuck the rock at your enemy. Oof."]
-	
-	damage = 5
+	description = "You hold the lightsaber in your hand. It's comforting."
+	droppped_description = "The hilt lies on the ground, quiet. You might want to pick it up."
+	equip_description = "A humming green blade emerges from the hilt, bathing the area in light." 
+	attack_descriptions = ["You swing the lightsaber.", "Going for a horizontal blow, you nearly cut your foe in half.", "SHWING batabatabata SHWING!"]
+
+class BlueSaber(Item):
+	name = "blue lightsaber"
+
+	description = "This blade has been with you from childhood. It's seen a lot, but still holds up."
+	dropped_description = "You know it's yours. Why isn't it with you?"
+	equip_description = "A blue blade hums away from your body. You feel prepared."
+	attack_descriptions = ["You slash at your enemy.", "Like an extension of your body, your lightsaber swings through the air.", "You strike at your foe, watching for a response."]
+
+class YellowSaber(Item):
+	name = "yellow lightsaber"
+
+	description = "It's not the most common blade color, but it's yours. Having it close is comforting."
+	dropped_description = "The lightsaber is on the floor. Your belt feels strange without it."
+	equip_description = "You equip your lightsaber, and a yellow blade hums happily."
+	attack_descriptions = ["You lunge forward, trying to catch your foe off guard.", "You release a mighty sweep of your blade!", "You slice at your enemy, nearly cutting him in half."]
 
 
-class Dagger(Weapon):
-	name = "dagger"
-	
-	description = "A small dagger with some rust. It looks pretty sharp."
-	dropped_description = "A dagger lies on the ground. It looks somewhat more dangerous than a rock."
-	equip_description = "You take the dagger in your hand."
-	attack_descriptions = ["You lunge forward with the dagger.", "You stab wildly with the dagger.", "You swing the dagger at your foe."]
-	
-	damage = 10
-
-
-class Rusty_Sword(Weapon):
-	name = "rusty sword"
-	
-	description = "A rusty sword. Despite its age, it still looks deadly."
-	dropped_description = "There is a rusty sword lying on the ground."
-	equip_description = "You arm yourself with the rusty sword."
-	attack_descriptions = ["You slash with your rusty sword.", "Your rusty sword connects mightily with your enemy.", "You swing the rusty sword with all your might."]
-	
-	damage = 20
-	
-	
-class Gold(Item):
-	value = 0		# Define this appropriately in your subclass.
-		
-	def obtain_text(self):
-		return "%i gold was added to your inventory." % value
-
-		
-class Gold_Coins(Gold):
-	name = "gold coins"
-	value = 5		
-	
-	description = "A small handful of gold coins."
-	dropped_description = "A shiny handful of gold coins is lying on the ground."
-	
-
-class Mountain_of_Gold(Gold):
-	name = "mountain of gold"
-	value = 100		
-	
-	description = "A lustrous mountain of gold coins."
-	dropped_description = "A lustrous mountain of gold coins is lying on the ground."
 	
 	
 class Container:
