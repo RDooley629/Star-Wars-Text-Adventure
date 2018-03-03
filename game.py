@@ -175,7 +175,7 @@ def handle_input(verb, noun1, noun2):
 			for enemy in world.tile_at(player.x, player.y).enemies:
 				if(enemy.name.lower() == noun1):
 					if(player.weapon):
-						[attack_text, damage] = player.weapon.attack()
+						[attack_text,] = player.weapon.attack()
 						attack_text += " " + enemy.take_damage(damage)
 					else:
 						attack_text = "You try to attack, but you come up empty handed! You should equip something first..."
@@ -186,6 +186,26 @@ def handle_input(verb, noun1, noun2):
 		else:
 			return "If you want to attack 'with' a weapon, please equip it first."
 		return "I'm not sure what you're trying to attack."
+
+elif(verb == 'force throw'):
+		if(not noun2):
+			for enemy in world.tile_at(player.x, player.y).enemies:
+				if(enemy.name.lower() == noun1):
+					if(player.forcepoints <=2): 
+						return "You pick up a piece of debris with the force and fling it at your enemy." + enemy.take_damage(player.force*2) + player.forcepoints -2
+					else return "You aren't focused enough to use the force right now."
+
+elif(verb == 'force push'):
+		if(not noun2):
+			for enemy in world.tile_at(player.x, player.y).enemies:
+				if(enemy.name.lower() == noun1):
+					if(player.forcepoints <=2): 
+						return "You push your enemy to the ground with the force." + enemy.take_damage(player.force) + player.forcepoints -2
+					else return "You aren't focused enough to use the force right now."
+
+elif(verb == 'meditate'):
+	player.forcepoints == player.maxforcepoints
+
 	elif(verb == 'buy'):
 		for npc in world.tile_at(player.x, player.y).npcs:
 			for good in npc.goods:

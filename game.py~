@@ -19,18 +19,31 @@ To toggle output from the game parser, type 'debug'. To exit the game at any tim
 		
 				
 
-player = Player()
+#player = Player()
 world = World()
+player = None
 	
 def play():	
+	global player
 	print_welcome_text()
-	
-	print_wrap(world.tile_at(player.x,player.y).intro_text())
-	
+
 	while True:
-		print()							# Print a blank line for spacing purposes.
+		player_class = input("Enter player class: Jedi Guardian, Jedi Sentinel, or Jedi Consular: ").lower()
+		if('guardian' in player_class):
+			player = Player('guardian')
+			break
+		elif('sentinel' in player_class):
+			player = Player('sentinel')
+			break
+		elif('consular' in player_class):
+			player = Player('consular')
+			break
+		else:
+			print("I don't understand. Please try again.")
+									# Print a blank line for spacing purposes.
 		[raw_input, parsed_input] = parse.get_command()
-		print()							# Print a blank line for spacing purposes.
+		print()
+# Print a blank line for spacing purposes.
 		
 		
 		if(debug_mode):	
@@ -162,7 +175,7 @@ def handle_input(verb, noun1, noun2):
 			for enemy in world.tile_at(player.x, player.y).enemies:
 				if(enemy.name.lower() == noun1):
 					if(player.weapon):
-						[attack_text, damage] = player.weapon.attack()
+						[attack_text,] = player.weapon.attack()
 						attack_text += " " + enemy.take_damage(damage)
 					else:
 						attack_text = "You try to attack, but you come up empty handed! You should equip something first..."
@@ -173,6 +186,26 @@ def handle_input(verb, noun1, noun2):
 		else:
 			return "If you want to attack 'with' a weapon, please equip it first."
 		return "I'm not sure what you're trying to attack."
+
+elif(verb == 'force throw'):
+		if(not noun2):
+			for enemy in world.tile_at(player.x, player.y).enemies:
+				if(enemy.name.lower() == noun1):
+					if(player.forcepoints <=2): 
+						return "You pick up a piece of debris with the force and fling it at your enemy." + enemy.take_damage(player.force*2) + player.forcepoints -2
+					else return "You aren't focused enough to use the force right now."
+
+elif(verb == 'force push'):
+		if(not noun2):
+			for enemy in world.tile_at(player.x, player.y).enemies:
+				if(enemy.name.lower() == noun1):
+					if(player.forcepoints <=2): 
+						return "You push your enemy to the ground with the force." + enemy.take_damage(player.force) + player.forcepoints -2
+					else return "You aren't focused enough to use the force right now."
+
+elif(verb == 'meditate'):
+	player.forcepoints == player.maxforcepoints
+
 	elif(verb == 'buy'):
 		for npc in world.tile_at(player.x, player.y).npcs:
 			for good in npc.goods:
