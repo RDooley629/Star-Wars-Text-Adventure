@@ -204,8 +204,8 @@ def handle_input(verb, noun1, noun2):
 			if(not noun2):
 				for enemy in world.tile_at(player.x, player.y).enemies:
 					if(enemy.name.lower() == noun1):
-						if(player.forcepoints <=2): 
-							return "You push your enemy to the ground with the force." + enemy.take_damage(player.force) + player.forcepoints -2
+						if(player.forcepoints <=1): 
+							return "You push your enemy to the ground with the force." + enemy.take_damage(player.force) + player.forcepoints -1
 						else:
 							return "You aren't focused enough to use the force right now."
 

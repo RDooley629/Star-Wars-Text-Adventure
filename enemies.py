@@ -62,21 +62,31 @@ class Enemy:
 
 class Stormtrooper(Enemy):
 	name = "Stormtrooper"
-	description = "It twitches its mandibles at you menacingly."
+	description = "An Imperial Stormtrooper clad in the signature black and white armor of the empire, comes towards you, and draws his blaster."
 	hp = 25
-	damage = 10
+	damage = 3
+    
+    agro = True
+
 	
 class StormtrooperGroup(Enemy):
 	name = "Stormtrooper"
-	description = "It twitches its mandibles at you menacingly."
-	hp = 25
-	damage = 10
+	description = "A group of Imperial Stormtroopers comes towards you blasters drawn."
+	hp = 60
+    damage == 5
+	if (StormtrooperGroup.hp <= 40):
+        damage == 4
+    elif (StormtrooperGroup.hp <= 20):
+        damage == 3
+    agro = True
 
-class ImperialOfficer(Enemy):
-	name = "Stormtrooper"
-	description = "It twitches its mandibles at you menacingly."
-	hp = 25
-	damage = 10
+class SithDisciple(Enemy):
+	name = "Sith Disciple"
+	description = "A sith cloaked in a long, black robe, brandishes his lightsaber and ignites it, the blade hisses as it grows to full size. He then moves the crimson blade into the starting stance of form 7, and lunges forward, ready to attack."
+	hp = 60
+	damage = 8
+    
+    agro = True
 	
 class Ogre(Enemy):
 	name = "Ogre"
