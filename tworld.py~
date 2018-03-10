@@ -250,7 +250,7 @@ class kitchen(Maptile):
 
 
 class landingarea(Maptile):
-	description = """The demo is now over. Thank you for playing! We might expand it in the future.
+	description = """
 	
 		"""
 

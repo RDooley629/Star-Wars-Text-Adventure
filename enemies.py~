@@ -62,11 +62,32 @@ class Enemy:
 
 class Stormtrooper(Enemy):
 	name = "Stormtrooper"
-	description = "It twitches its mandibles at you menacingly."
+	description = "A clone look-alike comes towards you. He draws his blaster."
 	hp = 25
-	damage = 10
+	damage = 3
+    
+	agro = True
 
+	
+class StormtrooperGroup(Enemy):
+	name = "Stormtrooper"
+	description = "A group of Imperial Stormtroopers comes towards you, blasters drawn."
+	hp = 60
+	damage = 5
+	###if (self.hp <= 40):
+        ###	damage = 4
+	#elif (self.hp <= 20):
+	#	damage = 3
+	#agro = True
 
+class SithDisciple(Enemy):
+	name = "Sith Disciple"
+	description = "A sith cloaked in a long, black robe, brandishes his lightsaber and ignites it, the blade hisses as it grows to full size. He then moves the crimson blade into the starting stance of form 7 and lunges forward, ready to attack."
+	hp = 60
+	damage = 8
+    
+	agro = True
+	
 class Ogre(Enemy):
 	name = "Ogre"
 	description = "It looks angry."
@@ -83,9 +104,4 @@ class BatColony(Enemy):
 	agro = True
 
 
-class RockMonster(Enemy):
-	name = "Rock Monster"
-	description = "A Rock Monster appears from the shadows. An old iron key dangles precariously from a stalagmite on the monster's shoulder."
-	hp = 80
-	damage = 15
-	loot = [items.Iron_Key("An old iron key lies on the ground near the remains of the Rock Monster.")]
+
