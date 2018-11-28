@@ -1,11 +1,12 @@
 import items
 
+
 class NPC:
 	name = "Do not create raw NPCs!"
 	description = "There is no description here because you should not create raw NPC objects!"
 	
-	goods = []	# Stuff an NPC is carrying.
-	quantities = []	# Quantities of that stuff.
+	goods = []		# Stuff an NPC is carrying.
+	quantities = []		# Quantities of that stuff.
 	
 	first_encounter = True			# Used to do something different on first encounter.
 	
@@ -13,7 +14,7 @@ class NPC:
 		return self.name
 		
 	def check_text(self):
-		if(self.first_encounter):
+		if self.first_encounter:
 			text = self.first_time()
 			return text
 		else:
@@ -32,7 +33,8 @@ class NPC:
 
 class OldMan(NPC):
 	name = "Old Man"
-	#goods = [items.Dagger(), items.Red_Potion(value = 50), items.Crusty_Bread(value = 5)]
+	# goods = [items.Dagger(), items.Red_Potion(value = 50), items.Crusty_Bread(value = 5)]
+	goods = [items.Smoothie(), items.Snack(value=1), items.Grenade(value=50)]
 	quantities = [1, -1, 2]		# Set quantity to -1 if you want it to be infinite.
 	
 	description = "An old man in a red robe is standing in the middle of the room."
@@ -41,7 +43,7 @@ class OldMan(NPC):
 		print("The old man says: I can sell you an item or two, if you are interested:")
 		for item in self.goods:
 			if item.value > 0:
-				if(self.quantities[self.goods.index(item)] > 0):
+				if self.quantities[self.goods.index(item)] > 0:
 					quantity = "quantity = %d" % self.quantities[self.goods.index(item)]
 				else:
 					quantity = "quantity = unlimited"
@@ -50,12 +52,12 @@ class OldMan(NPC):
 		
 	def give(self, item, inventory):
 		for good in self.goods:
-			if(good == item):
+			if good == item:
 				inventory.append(good)
-				if(self.quantities[self.goods.index(good)] > 0):
+				if self.quantities[self.goods.index(good)] > 0:
 					self.quantities[self.goods.index(good)] -= 1
-		for index in reversed(range(len(self.quantities))):	# Get rid of items with zero quantity.
-			if(self.quantities[index] == 0):
+		for index in reversed(range(len(self.quantities))):		# Get rid of items with zero quantity.
+			if self.quantities[index] == 0:
 				self.quantities.pop(index)
 				self.goods.pop(index)
 		return inventory
@@ -67,18 +69,18 @@ class OldMan(NPC):
 		return text
 		
 	def handle_input(self, verb, noun1, noun2, inventory):
-		if(noun1 == 'old man' or noun1 == 'man'):
-			if(verb == 'check'):
+		if (noun1 == 'old man') or (noun1 == 'man'):
+			if verb == 'check':
 				return [True, self.check_text(), inventory]
-			elif(verb == 'talk'):
+			elif verb == 'talk':
 				text = self.talk()
 				return [True, text, inventory]
-		elif(verb == 'take'):
+		elif verb == 'take':
 			for good in self.goods:
-				if(good.name.lower() == noun1):
-					if(good.value == 0):
+				if good.name.lower() == noun1:
+					if good.value == 0:
 						inventory = self.give(good, inventory)
 						return [True, "The old man gave you the %s." % good.name, inventory]
 					else:
-						return [True, "'Hey, what are you trying to pull? If you want that, the cost is %d gold.'" % good.value, inventory]
+						return [True, "'Oi! What are you trying to pull? If you want that, it costs is %d gold.'" % good.value, inventory]
 		return [False, "", inventory]

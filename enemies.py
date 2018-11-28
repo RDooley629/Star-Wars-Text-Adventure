@@ -10,21 +10,21 @@ class Enemy:
 	
 	loot = []
 	
-	agro = False	# Used to cause enemies to attack spontaneously.
+	agro = False		# Used to cause enemies to attack spontaneously.
 	
-	def __init__(self, direction = None, loot = []):
-		if(direction == 'n'):
+	def __init__(self, direction=None, loot=[]):
+		if direction == 'n':
 			self.direction = 'north'
-		elif(direction == 's'):
+		elif direction == 's':
 			self.direction = 'south'
-		elif(direction == 'e'):
+		elif direction == 'e':
 			self.direction = 'east'
-		elif(direction == 'w'):
+		elif direction == 'w':
 			self.direction = 'west'
 		else:
 			self.direction = None
 		
-		if(len(self.loot) > 0):
+		if len(self.loot) > 0:
 			for item in loot:
 				self.loot.append(item)
 		else:
@@ -35,23 +35,23 @@ class Enemy:
 		
 	def check_text(self):
 		text = ""
-		if(self.direction):
+		if self.direction:
 			text = "A %s is blocking your progress to the %s." % (self.name, self.direction)
 		text += " " + self.description			
 		return text
 
 	def take_damage(self, amount):
 		self.hp -= amount
-		if(self.hp <= 0):
+		if self.hp <= 0:
 			self.hp = 0
 			defeat_text = "The %s is defeated." % self.name
-			if(len(self.loot) > 0):
+			if len(self.loot) > 0:
 				defeat_text += " It dropped the following items: "
 				for item in self.loot:
 					defeat_text += "* " + str(item)
 			return defeat_text
 		else:
-			return "The %s took %d damage." % (self.name, amount)
+			return "The %s took %d damage. Ow!" % (self.name, amount)
 			
 	def is_alive(self):
 		return self.hp > 0
@@ -60,33 +60,21 @@ class Enemy:
 		return [False, None, inventory]
 
 
-class Stormtrooper(Enemy):
-	name = "Stormtrooper"
-	description = "A clone look-alike comes towards you. He draws his blaster."
-	hp = 25
+class Zombie(Enemy):
+	name = "zombie"
+	description = "A zombie turns its head toward you, then lunges!"
+	hp = 20
 	damage = 3
-    
+	loot = [items.Snack()]
 	agro = True
 
 	
-class StormtrooperGroup(Enemy):
-	name = "Stormtrooper"
-	description = "A group of those look-alikes come towards you. They open fire."
+class ZombieHorde(Enemy):
+	name = "zombie horde"
+	description = "A group of zombies blocks the way to the monorail. They don't seem to have noticed you yet."
 	hp = 60
-	damage = 5
-	###if (self.hp <= 40):
-        ###	damage = 4
-	#elif (self.hp <= 20):
-	#	damage = 3
-	agro = True
+	damage = 12
 
-class SithDisciple(Enemy):
-	name = "Sith Disciple"
-	description = "A sith cloaked in a long, black robe, brandishes his lightsaber and ignites it, the blade hisses as it grows to full size. He then moves the crimson blade into the starting stance of form 7 and lunges forward, ready to attack."
-	hp = 60
-	damage = 8
-    
-	agro = True
 	
 class Ogre(Enemy):
 	name = "Ogre"
