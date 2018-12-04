@@ -62,7 +62,7 @@ class Enemy:
 
 class Zombie(Enemy):
 	name = "zombie"
-	description = "A zombie turns its head toward you, then lunges!"
+	description = "Catching your scent, it turns its head toward you and then lunges!"
 	hp = 20
 	damage = 3
 	loot = [items.Snack()]
@@ -71,7 +71,7 @@ class Zombie(Enemy):
 	
 class ZombieHorde(Enemy):
 	name = "zombie horde"
-	description = "A group of zombies blocks the way to the monorail. They don't seem to have noticed you yet."
+	description = "They don't seem to have noticed you yet, but it never hurts to be sure."
 	hp = 60
 	damage = 12
 

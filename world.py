@@ -271,13 +271,13 @@ class VictoryTile(MapTile):
 		Victory is yours!
 		"""
 		
-class World:									# I choose to define the world as a class. This makes it more straightforward to import into the game.
+class World:		# I choose to define the world as a class. This makes it more straightforward to import into the game.
 	map = [
-		[Corridor(barriers = [barriers.LockedDoor('e')]),			NearVictory(barriers = [barriers.Wall('s')]),																VictoryTile(),																																										Corridor(barriers = [barriers.Wall('w')]), 																			Corridor()],
-		[ExpanseNW(),												ExpanseNE(barriers = [barriers.Wall('n')]),	 																Nook(barriers = [barriers.Wall('n'), barriers.Wall('s'), barriers.Wall('e')]), 																										Corridor(barriers = [barriers.Wall('e'), barriers.Wall('w')], enemies = [enemies.Ogre('s')]),						Corridor(barriers = [barriers.Wall('w')])],
-		[ExpanseSW(),												ExpanseSE(barriers = [barriers.Wall('s')]), 																Corridor(barriers = [barriers.Wall('n'), barriers.Wall('s')]), 																														Corridor(barriers = [barriers.Wall('e'), barriers.Wall('s')]),		 												Corridor(barriers = [barriers.Wall('w')])],
-		[Corridor(barriers = [barriers.Wall('n')]),					Corridor(barriers = [barriers.Wall('n')]),																	StartTile(barriers = [barriers.Wall('s'), barriers.Wall('n')]), 																													Corridor(barriers = [barriers.Wall('n')]), 																			Corridor()],
-		[Cave(barriers = [barriers.Wall('e')]),						Corridor(barriers = [barriers.WoodenDoor('e'), barriers.Wall('w')], enemies = [enemies.GiantSpider('e')]),	StoreRoom(barriers = [barriers.Wall('n')]),																																			None,																												None]
+		[Corridor(barriers = [barriers.LockedDoor('e')]),		NearVictory(barriers = [barriers.Wall('s')]),																	VictoryTile(),																		Corridor(barriers = [barriers.Wall('w')]), 														Corridor()],
+		[ExpanseNW(),											ExpanseNE(barriers = [barriers.Wall('n')]),	 																Nook(barriers = [barriers.Wall('n'), barriers.Wall('s'), barriers.Wall('e')]), 	Corridor(barriers = [barriers.Wall('e'), barriers.Wall('w')], enemies = [enemies.Ogre('s')]),		Corridor(barriers = [barriers.Wall('w')])],
+		[ExpanseSW(),											ExpanseSE(barriers = [barriers.Wall('s')]), 																	Corridor(barriers = [barriers.Wall('n'), barriers.Wall('s')]), 					Corridor(barriers = [barriers.Wall('e'), barriers.Wall('s')]),		 								Corridor(barriers = [barriers.Wall('w')])],
+		[Corridor(barriers = [barriers.Wall('n')]),			Corridor(barriers = [barriers.Wall('n')]),																		StartTile(barriers = [barriers.Wall('s'), barriers.Wall('n')]), 					Corridor(barriers = [barriers.Wall('n')]), 														Corridor()],
+		[Cave(barriers = [barriers.Wall('e')]),				Corridor(barriers = [barriers.WoodenDoor('e'), barriers.Wall('w')], enemies = [enemies.GiantSpider('e')]),	StoreRoom(barriers = [barriers.Wall('n')]),										None,																								None]
 	]
 
 	def __init__(self):
@@ -288,8 +288,7 @@ class World:									# I choose to define the world as a class. This makes it mo
 					self.map[i][j].y = i
 					
 					self.add_implied_barriers(j,i)	# If there are implied barriers (e.g. edge of map, adjacent None room, etc.) add a Wall.
-						
-					
+
 	def tile_at(self, x, y):
 		if x < 0 or y < 0:
 			return None

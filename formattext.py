@@ -1,7 +1,7 @@
 from terminalsize import get_terminal_size					# Allows us to determine terminal window size on any OS.
 															# Adapted for Python 3.x from https://gist.github.com/jtriley/1108174
 
-import textwrap	# Gives us tools for formatting text in a much prettier fashion.
+import textwrap		# Gives us tools for formatting text in a much prettier fashion.
 
 
 wrap_width = 0								# We will use this so that we can wrap text.
@@ -11,13 +11,13 @@ wrap_width = 0								# We will use this so that we can wrap text.
 def get_width():
 	dimensions = get_terminal_size()
 	global wrap_width 
-	wrap_width = dimensions[0] - 3				# Get the width of the user's window so we can wrap text.
+	wrap_width = dimensions(1) - 3				# Get the width of the user's window so we can wrap text.
 	return dimensions
-    
-	
+
+
 def clear_screen():
 	terminal = get_width()
-   
+
 	for i in range(terminal[1]):
 		print("")									# There are fancier ways to clear a screen, but this aligns our text where we want it at the bottom of the window.
 

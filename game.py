@@ -6,23 +6,24 @@ from player import Player
 from tworld import World
 import parse
 
-debug_mode = True		# Use this to toggle verbose mode on the text parser.
+debug_mode = False		# Use this to toggle verbose mode on the text parser.
 
-game_name = "Escape from Cave Terror, v4"
+game_name = "Escape from the Airport"
 
-help_text = "To interact with this game world, you will use a basic text-based interface. \
-Try single-word commands like 'inventory' or 'west' (or their counterpart abbreviations, 'i' or 'w', respectively \
-to get started. For more complex interactions, use commands of the format [VERB][NOUN] (e.g. 'open door', \
-or in some cases, [VERB][NOUN][OBJECT] (e.g. 'attack thief with nasty knife').\
-The game will ignore the articles 'a', 'an', and 'the' (e.g. 'open the door' is the same as 'open door.').\n\n\
-To toggle output from the game parser, type 'debug'. To exit the game at any time, type 'exit' or 'quit'."
+help_text = \
+	"To interact with this game world, you will use a basic text-based interface. \n\
+	Try single-word commands like 'inventory' or 'west' (or their counterpart abbreviations, 'i' or 'w', respectively \n\
+	to get started. For more complex interactions, use commands of the format [VERB][NOUN] (e.g. 'open door', \n\
+	or in some cases, [VERB][NOUN][OBJECT] (e.g. 'attack thief with nasty knife').\n\
+	The game will ignore the articles 'a', 'an', and 'the' (e.g. 'open the door' is the same as 'open door.').\n\n\
+	To toggle output from the game parser, type 'debug'. To exit the game at any time, type 'exit' or 'quit'."
 
 		
 #
 
-#player = Player()
+player = Player()
 world = World()
-player = None
+# player = None
 
 
 def play():	
@@ -47,13 +48,13 @@ def play():
 			[verb, noun1, noun2] = parsed_input
 			result_text = handle_input(verb, noun1, noun2)
 			if result_text:
-				if isinstance(result_text, list):	# Find out if there is more than one sentence returned.
+				if isinstance(result_text, list):		# Find out if there is more than one sentence returned.
 					for text in result_text:
-						print_wrap(text)
+						print(text)
 						if "Victory is yours" in text:
 							print_victory_text()
 				else:
-					print_wrap(result_text)
+					print(result_text)
 					if "Victory is yours" in result_text:
 						print_victory_text()
 		else:
@@ -158,7 +159,7 @@ def handle_input(verb, noun1, noun2):
 			return "I think you are trying to look at something, but your phrasing is too complicated. Please try again."
 			
 	elif verb == 'attack':
-		if not noun2:
+		if noun2:
 			for enemy in world.tile_at(player.x, player.y).enemies:
 				if enemy.name.lower() == noun1:
 					if player.weapon:
@@ -173,19 +174,19 @@ def handle_input(verb, noun1, noun2):
 									player.inventory.pop(player.inventory.index(thing))
 									return[True, grenade_text]
 
-					# 			for item in self.inventory:
-					# 				if item.name.lower() == noun1:
-					# 					if isinstance(item, items.Consumable):
-					# 						heal_text = item.consume_description
-					# 						heal_text += " " + self.heal(item.healing_value)
-					# 						self.inventory.pop(self.inventory.index(item))
-					# 						return [True, heal_text]
+					# 		for item in self.inventory:
+					# 			if item.name.lower() == noun1:
+					# 				if isinstance(item, items.Consumable):
+					# 					heal_text = item.consume_description
+					# 					heal_text += " " + self.heal(item.healing_value)
+					# 					self.inventory.pop(self.inventory.index(item))
+					# 					return [True, heal_text]
 					else:
 						attack_text = "You try to attack, but you come up empty handed! You should equip something first..."
 					if enemy.is_alive() and not enemy.agro:
 						attack_text += " The %s retaliated..." % enemy.name
 						attack_text += " " + player.take_damage(enemy.damage)
-					return attack_text	
+					return attack_text
 		else:
 			return "If you want to attack *with* a weapon, please equip it first."
 		return "I'm not sure what you're trying to attack."
@@ -223,13 +224,14 @@ def handle_input(verb, noun1, noun2):
 
 
 def print_welcome_text():
-	clear_screen()
-	print_center("========================================================")
+	# clear_screen()
+	print("========================================================")
 	print()
-	print_center("WELCOME TO %s!" % game_name.upper())
+	print("WELCOME TO %s!" % game_name.upper())
 	print()
-	print_center("========================================================")
+	print("========================================================")
 	print()
+	print('If you need help, type "help".')
 
 
 def print_victory_text():
@@ -238,12 +240,12 @@ def print_victory_text():
 					"There are six different endings. Can you find them all?"]
 				
 	print()
-	print_center("========================================================")
+	print("========================================================")
 	print()
 	for line in victory_text:
-		print_center(line)
+		print(line)
 	print()
-	print_center("========================================================")
+	print("========================================================")
 	exit()
 
 
@@ -252,12 +254,12 @@ def print_loss_text():
 					"Yet another zombie joins the horde.",
 					"Better luck next time!"]
 	print()
-	print_center("========================================================")
+	print("========================================================")
 	print()
 	for line in loss_text:
-		print_center(line)
+		print(line)
 	print()
-	print_center("========================================================")
+	print("========================================================")
 	exit()
 
 	

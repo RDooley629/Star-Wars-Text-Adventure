@@ -47,8 +47,8 @@ class Item:
 class Keychip(Item):
 	name = "keychip"
 	
-	description = "A red keychip from the gardener's hut. Probably opens something."
-	dropped_description = "An old iron key is lying on the ground."	
+	description = "A red keychip from the lobby. You're not sure how it got there."
+	dropped_description = "A keychip lies on the ground. That probably breaks regulation."
 		
 		
 class Consumable(Item):
@@ -107,6 +107,9 @@ class Weapon(Item):
 			
 	def attack(self):
 		return [self.attack_descriptions[randint(0, len(self.attack_descriptions)-1)]]
+		# def attack(self):
+		# return [self.attack_descriptions[randint(0, len(self.attack_descriptions))], self.damage]
+		# Return damage and a random attack description from your list.
 		# Return a random attack description from your list.
 
 
@@ -201,6 +204,7 @@ class Storage_Locker(Container):
 	open_description = "The door of the storage locker lies slightly ajar."
 
 	contents = [Shotgun(), Grenade(), Old_Donut()]
+
 	
 	def handle_input(self, verb, noun1, noun2, inventory):
 		if noun1 == self.name:

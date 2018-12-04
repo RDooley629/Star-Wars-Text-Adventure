@@ -8,12 +8,12 @@ class Player:
 
 	def __init__(self):
 
-		self.damage = 6
-		self.defense = 10
+		self.damage = 0
+		self.defense = 20
 		self.inventory = [items.PepperSpray(), items.Crusty_Bread()]
 		self.health = self.defense*5
 		self.max_hp = self.defense*5
-		self.weapon = items.PepperSpray()
+		self.weapon = None
 		self.x = 2
 		self.y = 2
 #

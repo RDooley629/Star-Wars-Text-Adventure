@@ -31,8 +31,10 @@ class Wall(Barrier):
 
 
 class Door(Barrier):
-	name = 'Wooden Door'
+	name = 'door'
 	state = 'open'		# Used to store the state of doors or hidden passages.
+	locked = False
+	passable = True
 
 	verbose = True		# Used to determine whether or not include the barrier's description in the room description.
 
@@ -94,7 +96,7 @@ class Sliding(Barrier):
 
 	def description(self):
 		if self.state == 'closed':
-			return "A closed, unpowered sliding door lies to the %s, blocking the way between the ticket counters and the parking lot." % self.direction
+			return "A closed, unpowered sliding door lies to the %s, blocking the way to the parking lot." % self.direction
 		else:
 			return "The 'glass' door to the %s has been forced open." % self.direction
 
@@ -168,7 +170,7 @@ class lockeddoor(Barrier):
 					elif noun2 == 'key':
 						return [True, "You pat your pockets for your house key, only to realize you need the keychip for this door.", inventory]
 					else:
-						return [True, "What ITEM do you plan to UNLOCK the DOOR with? DO I NEED TO CAPITALIZE EVERYTHING?", inventory]
+						return [True, "What ITEM do you plan to UNLOCK the DOOR WITH", inventory]
 				elif self.state == 'open':
 					return [True, "You can't unlock an open door. That's not how that works.", inventory]
 

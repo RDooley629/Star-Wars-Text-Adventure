@@ -34,16 +34,16 @@ class Maptile:
 			if enemy.direction:
 				if enemy.direction not in directions_blocked:
 					directions_blocked.append(enemy.direction)
-			text += " " + enemy.check_text()
+			text += "" + enemy.check_text()
 		for barrier in self.barriers:
 			if barrier.direction:
 				if barrier.direction not in directions_blocked:
 					if barrier.verbose:
-						text += " " + barrier.description()
+						text += "" + barrier.description()
 		for npc in self.npcs:
-			text += " " + npc.check_text()
+			text += "" + npc.check_text()
 		for item in self.items:
-			text += " " + item.room_text()
+			text += "" + item.room_text()
 
 		return text
 		
@@ -139,7 +139,7 @@ class Maptile:
 				player.y = self.teleport[1]
 			for enemy in self.enemies:
 				if enemy.agro:
-					agro_text = "The %s seems very aggitated. It attacks! " % enemy.name
+					agro_text = "The %s seems very agitated. It attacks! " % enemy.name
 					agro_text += player.take_damage(enemy.damage)
 					print()
 					print(agro_text)	
@@ -149,102 +149,155 @@ class Maptile:
 #
 
 class FoodComa(Maptile):
-	description = """ You gorge yourself on food, revelling in the taste of airport food. \
-	Soon, you find your eyelids growing heavy. Despite yourself, you soon fall asleep. \
-	You die in your sleep. Whether by zombie or by heart attack, the world may never know. \
-	Victory is yours, I suppose.
-	
-		"""
+	description = \
+		"""You gorge yourself on food, revelling in the taste of airport food. \n\
+Soon, you find your eyelids growing heavy. Despite yourself, you soon fall asleep. \n\
+You die in your sleep. Whether by zombie or by heart attack, the world may never know. \n\
+Victory is yours, I suppose.
+"""
 
 
 class FoodCourt(Maptile):
-	description = """
-
-		"""
+	description = \
+		"""The airport food court, where new travellers stress-eat their \n\
+worries away and old travellers rest between layovers.
+"""
 
 
 class MainAirport(Maptile):
-	description = """
-
-		"""
+	description = \
+		"""Terminals stretch before you, empty as can be. While you could wander for hours, there \n\
+are only a few places that you think could be useful right now. To the east is the monorail, which could bring \n\
+you to the outer terminals. To the west is the food court, if you're hungry at all. To the south are the escalators, \n\
+bane of shoelaces everywhere.
+"""
 
 
 class Monorail(Maptile):
-	description = """
-
-		"""
+	description = \
+		"""The rails are empty at first, but the monorail rumbles over after a few short minutes \n\
+of waiting. There doesn't seem to be anybody else on board. Hesitantly, you step onto the old carpet, hard \n\
+beneath your feet. After a few minutes, the monorail takes off again. The familiar female voice tells you \n\
+once you've arrived to Terminal D, International Flights. You step off, only to see a German woman wave you over \n\
+to a gate. It seems an arriving flight landed, realized there were zombies, and turned around to leave. \n\
+You were just in time. Victory is yours.
+"""
 
 
 class MarioCart(Maptile):
-	description = """
-
-		"""
+	description = \
+		"""Luggage carts both full and empty litter the area. The sky stretches between the horizon and \n\
+the airport, blue as your daughter's eyes. Clouds of cotton dot the sky like water on the wall after a dog \n\
+shakes itself dry. The main airport lies to the west, but you see the runway stretch south. There are some \n\
+zombies there, but a luggage cart could probably maneuver its way through them safely. There's a red one that \n\
+looks like it could do the job.
+"""
 
 
 class Gate(Maptile):
-	description = """
-
-		"""
+	description = \
+		"""You're standing in Terminal B, specifically between gates B12 and B13. To the south - \n\
+toward gate B15 - you hear the rumble of feet within a passenger boarding bridge. There might be a plane \n\
+docked there, but it could just as easily be more zombies. To the west is a staircase that leads to ground level. \n\
+There are probably some luggage carts down there, if you want to take a look. To the east, the escalator \n\
+continues its continual climb upward.
+"""
 
 
 class Escalator(Maptile):
-	description = """
-
-		"""
+	description = \
+		"""The escalators lies before you, forever churning their steps forward. \n\
+To the south lies the security checkpoint. To the west, you see Terminal B. North lies the \n\
+the heart of the airport. To the east is the contraband room. You never know what you'll \n\
+find in there, really.
+"""
 
 
 class Contraband(Maptile):
-	description = """
-
-		"""
+	description = \
+		"""Ah, the contraband room. All sorts of things have ended up here, from machetes to rifles. \n\
+Good times. At any rate, it also doubles as a sort of break room during lunch. Sure, there's an \n\
+official break room, but you and your buddy Joe used to hang out in here with burgers and guess \n\
+how people decided to bring each thing into an airport. ANYWAY! Nostalgia aside, the exit lies \n\
+to the west, along with the rest of the airport. Every other wall is covered in storage lockers, \n\
+cat posters, or cat poster-covered storage lockers.
+"""
 
 
 class LuggageVoid(Maptile):
-	description = """
-
-		"""
+	description = \
+		"""You maneuver your way through the zombies with ease, reflexes honed by years of battling \n\
+your siblings in Mario Cart. You pull off of the runway and onto a side path, headed away from \n\
+the airport. You see the vast concrete fields of rental cars, highways, and parking structures \n\
+stretching before you, but success is snatched away just as you begin to taste it. \n\
+The first thing you recognize is that it's cold. The second is that you don't really feel gravity \n\
+anymore. Looking around, your lose your breath. A great brown orb lies before you, dominating \n\
+the sky and surrounded by a halo of stars. To your sides, floating pieces of luggage fill \n\
+the air. You reach out to grab a handle, but the world lurches once more as you make contact. \n\
+You wake up in your bed, drenched in sweat. Clutched in your hand is a suitcase you've never \n\
+seen before. Inside lies nothing but a model of the solar system, engraved with "Victory is yours."
+"""
 
 
 class Plane(Maptile):
-	description = """
-
-		"""
+	description = \
+		"""Walking over to gate B15, you see what seems to be a group of soldiers hurrying \n\
+into the airport. In a flurry of events, you're spotted, escorted onto the plane by \n\
+two men, and brought to a military base you don't remember hearing the name of. You \n\
+don't remember much of the flight. You're asked a great many questions, but you're \n\
+finally released and sent back home. Victory is yours."""
 
 
 class Checkpoint(Maptile):
-	description = """
-
-		"""
+	description = \
+		"""You find yourself at the security checkpoint. \n\
+You've confiscated many a Zippo and dumped many a water bottle here. \n\
+To the north are the escalators, which will take you to the body of the airport. \n\
+To the south is the entrance lobby, which then leads to the rental cars. 
+"""
 
 
 class Bathroom(Maptile):
-	description = """
-
-		"""
+	description = \
+		"""Surrounding you is an airport bathroom. There really isn't much to \n\
+say here beyond that it's a bathroom, you're in it, and there's some 2012 \n\
+pop song playing over the speakers.
+"""
 
 
 class Cars(Maptile):
-	description = """
-
-		"""
+	description = \
+		"""While this parking lot is filled with rental cars, you park a little further out. \n\
+It takes you a few minutes, but you finally make it to the employee parking garage. \n\
+You walk down the line of cars, then come to a stop before a motorcycle. As you \n\
+cruise off into the distance, you smile. There are a great many rides out there, \n\
+but this Victory is yours."""
 
 
 class TicketCounter(Maptile):
-	description = """
-
-		"""
+	description = \
+		"""The ticket counters line the wall to the north, empty of their normal staff. It seems \n\
+like nobody else got caught in zombieland. Still, it's certainly given you a great \n\
+story for the kiddos. To the west are the rental cars (why the airport decided to \n\
+put the rental cars here as well as by departures is a mystery} and to the east is \n\
+the lobby. What do you want to do?
+"""
 
 
 class Lobby(Maptile):
-	description = """
-
-		"""
+	description = \
+		"""You stand in the lobby of the airport. Above you is some trendy, modern-looking \n\
+sculpture that probably cost way too much.
+"""
 
 
 class LobbyEast(Maptile):
-	description = """
-
-		"""
+	description = \
+		"""The east section of the lobby. Calming music plays over the speakers. It really doesn't \n\
+seem appropriate for Raindrops by Chopin to be playing during a zombie \n\
+apocalypse, though. To the north are the bathrooms. To the west is the \n\
+main lobby. That's about it, really.
+"""
 
 #
 
@@ -252,9 +305,9 @@ class LobbyEast(Maptile):
 class World:
 	map = [
 		[FoodComa(), 									FoodCourt(barriers=[barriers.Wall('s')], items=[items.Smoothie()]),	MainAirport(enemies=[enemies.ZombieHorde('e')]), 				Monorail()	],
-		[MarioCart(barriers=[barriers.Wall('n')]), 	Gate(barriers=[barriers.Wall('n')], enemies=[enemies.Zombie('w')]),	Escalator(barriers=[barriers.lockeddoor('e')]), 				Contraband(barriers=[barriers.Wall('n'), barriers.Wall('s'), barriers.Door('w')], items=[items.Storage_Locker])	],
+		[MarioCart(barriers=[barriers.Wall('n')]), 	Gate(barriers=[barriers.Wall('n')], enemies=[enemies.Zombie('w')]),	Escalator(barriers=[barriers.lockeddoor('e')]), 				Contraband(barriers=[barriers.Wall('n'), barriers.Wall('s'), barriers.Door('w')], items=[items.Shotgun(), items.Grenade(), items.Old_Donut()])	],
 		[LuggageVoid(), 								Plane(), 																Checkpoint(barriers=[barriers.Wall('e'), barriers.Wall('w')]),	Bathroom(barriers=[barriers.Wall('n'), barriers.Wall('w')], enemies=[enemies.Zombie('s')])],
-		[Cars(), 										TicketCounter(barriers=[barriers.Wall('n'), barriers.Sliding('w')]), 	Lobby(enemies=[enemies.Zombie('w')]), 							LobbyEast()	]
+		[Cars(), 										TicketCounter(barriers=[barriers.Wall('n'), barriers.Sliding('w')]), 	Lobby(enemies=[enemies.Zombie('w')], items=[items.Keychip()]),	LobbyEast()	]
 
 
 	]
@@ -418,6 +471,4 @@ class World:
 					player = room.update(player)	
 		return player
 
-
-
-
+#
